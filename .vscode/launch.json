@@ -19,11 +19,17 @@
         ],
         "internalConsoleOptions": "openOnSessionStart"
       },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${file}"
+      {
+        "name": "Launch ProductCatalog.html",
+        "type": "chrome",
+        "request": "launch",
+        "file": "${workspaceRoot}/ProductCatalog.html"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch Program",
+        "program": "${file}"
         }
     ]
 }

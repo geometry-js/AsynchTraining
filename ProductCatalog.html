@@ -6,10 +6,27 @@
 
     </head>
     <body>
-<div>
-    <h3>Search Product by Id</h3>
-    <input id="input">
-    <button id="inputButton" >Search Product</button>
+    <div>
+      <h3>Search Product by Id</h3>
+      <input id="inputId" type="number">
+      <button id="inputButtonId" >Search Product</button>
+    </div>
+    <div>
+      <h3>Search Product by Type</h3>
+      <input type="text" id="inputType" list="typesOfGoods">
+      <datalist id="typesOfGoods">
+          <option value="Electronics">
+          <option value="Book">
+          <option value="Clothing">
+          <option value="Food">
+          <option value="Sport">
+      </datalist>
+      <button id="inputButtonType" >Search Type</button>
+    </div>
+    <div>
+      <h3>Search Product by Price</h3>
+      <input id="inputPrice">
+      <button id="inputButtonPrice" >Search Price</button>
     </div>
     <div >
         <h3>Examined Product</h3>
