@@ -7,7 +7,7 @@
       {
         "type": "node",
         "request": "launch",
-        "name": "Mocha Tests",
+        "name": "Mocha Tests library",
         "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
         "args": [
           "-u",
@@ -16,6 +16,21 @@
           "999999",
           "--colors",
           "${workspaceRoot}/*.test.js"
+        ],
+        "internalConsoleOptions": "openOnSessionStart"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Mocha Tests",
+        "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+        "args": [
+          "-u",
+          "tdd",
+          "--timeout",
+          "999999",
+          "--colors",
+          "${workspaceRoot}/Fetch/*.test.js"
         ],
         "internalConsoleOptions": "openOnSessionStart"
       },
