@@ -4,6 +4,45 @@ function addParameterToURL(location, param){
   return _url;
 }
 
+var attributes = document.getElementById(idAttributes);
+var table=document.createElement('TABLE');
+table.border='1';
+var tbdy=document.createElement('TBODY');
+table.appendChild(tbdy);
+
+function traverse_it(obj){
+  if( typeof traverse_it.array == 'undefined' ) {
+    traverse_it.array = [];
+    traverse_it.counter = 0;
+    traverse_it.depth = 0;
+  }
+  for(var prop in obj){
+      if(typeof obj[prop]=='object'){
+          // object
+          traverse_it.array[traverse_it.counter]=traverse_it.depth == 0
+            ? document.getElementById('idFaceURL').value
+            : `${"&nbsp &nbsp".repeat(traverse_it.depth)} ${prop}`;
+          traverse_it.counter+=1;
+          traverse_it.depth+=1;
+          var tr=document.createElement('TR');
+          tr.innerHTML = traverse_it.array[traverse_it.counter-1];
+          tbdy.appendChild(tr);
+
+          traverse_it(obj[prop]);
+      }else{
+          // something else
+          const multi=function (char, count){}
+          traverse_it.array[traverse_it.counter]=`${"&nbsp &nbsp".repeat(traverse_it.depth)} ${prop} : ${obj[prop]}`;
+          var tr=document.createElement('TR');
+          tr.innerHTML = traverse_it.array[traverse_it.counter];
+          tbdy.appendChild(tr);
+          traverse_it.counter+=1;
+      }
+  }
+  traverse_it.depth-=1;
+}
+
+
 document.getElementById("idBtn").onclick = ()=> {
   const url=document.getElementById("idFaceURL").value;
   document.getElementById("idImage").src=url;
@@ -43,14 +82,15 @@ document.getElementById("idBtn").onclick = ()=> {
 
   fetch(request).then(function(response){
     if(response.ok){
-          return response.text();
+          return response.json();
       }
     else{
           return Promise.reject(new Error(response.statusText));
     }
   }).then(function(response){
-      document.getElementById("idAttributes").innerHTML =
-      `Face analysis: ${response}`;
+     traverse_it(response);
+     document.getElementById("idAttributes").appendChild(table);
+      //`Face analysis: ${traverse_it.array[1]}`;
   }).catch(function(err){
       alert(err);
       document.getElementById("idAttributes").innerHTML = "";
